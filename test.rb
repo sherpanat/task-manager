@@ -23,7 +23,7 @@ DB.execute(
 puts 'READ - find'
 task = Task.find(1)
 p task
-
+puts '*' * 20
 # Implement the CREATE logic in a save instance method
 puts 'CREATE - save'
 task = Task.new(
@@ -33,7 +33,7 @@ task = Task.new(
 puts task.id == nil
 task.save
 p task.id
-
+puts '*' * 20
 # Implement the UPDATE logic in the same method
 puts 'UPDATE - save'
 task = Task.find(2)
@@ -42,17 +42,16 @@ task.done = true
 task.save
 puts task.title
 puts task.done
-
+puts '*' * 20
 # Implement the READ logic to retrieve all tasks (what type of method is it?)
 puts 'READ - all'
 tasks = Task.all
 tasks.each do |task|
-  done_as_x = (task.done == 1) ? 'X' : ' '
-  puts "[#{done_as_x}] #{task.title}: #{task.description}"
+  puts "[#{task.done ? 'X' : ' '}] #{task.title}: #{task.description}"
 end
-
+puts '*' * 20
 # Implement the DESTROY logic on a task
 puts 'DELETE - destroy'
 task = Task.find(2)
 task.destroy
-p "Destroy ? #{task.destroy}"
+p Task.find(2)

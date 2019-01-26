@@ -11,7 +11,7 @@ class Task
 
   def self.find(id)
     task = DB.execute("SELECT * FROM tasks WHERE id = ?", id).first
-    build_instance(task)
+    return build_instance(task) if task
   end
 
   def save
@@ -19,7 +19,7 @@ class Task
   end
 
   def destroy
-    DB.execute("DELETE FROM tasks WHERE id = ?", id)
+    DB.execute("DELETE FROM tasks WHERE id = ?", id).first
   end
 
   def self.all
@@ -32,7 +32,7 @@ class Task
       id: attributes['id'],
       title: attributes['title'],
       description: attributes['description'],
-      done: attributes['done']
+      done: attributes['done'] == 1
     )
   end
 
